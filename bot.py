@@ -3,6 +3,7 @@ import pandas as pd
 from datetime import datetime
 import json
 import os
+import re
 
 from telegram import Update
 from telegram.ext import ApplicationBuilder, MessageHandler, filters, ContextTypes
@@ -19,6 +20,37 @@ if not TELEGRAM_TOKEN or not OPENAI_KEY:
 client = OpenAI(api_key=OPENAI_KEY)
 
 usuarios = {}
+
+# =========================
+# PARSER LOCAL (ECONOMIA)
+# =========================
+def parse_local(texto):
+    match = re.search(r'(\d+[.,]?\d*)', texto)
+    if not match:
+        return None
+
+    valor = float(match.group(1).replace(",", "."))
+    texto_lower = texto.lower()
+
+    categorias = {
+        "uber": "transporte",
+        "99": "transporte",
+        "gasolina": "combustivel",
+        "mercado": "mercado",
+        "ifood": "comida",
+        "lanche": "comida",
+        "farmacia": "saude"
+    }
+
+    for palavra, cat in categorias.items():
+        if palavra in texto_lower:
+            return [{
+                "valor": valor,
+                "categoria": cat,
+                "descricao": texto
+            }]
+
+    return None
 
 # =========================
 # FUNÇÕES
@@ -258,30 +290,25 @@ async def responder(update: Update, context: ContextTypes.DEFAULT_TYPE):
     try:
         dividir = "dividir" in texto_lower
 
-        resposta = client.chat.completions.create(
-            model="gpt-4o-mini",
-            messages=[{
-                "role": "user",
-                "content": f"""
-Extraia valor, descrição e categoria.
+        dados = parse_local(texto)
 
-Categorias:
-transporte, combustivel, mercado, comida, saude
+        if not dados:
+            resposta = client.chat.completions.create(
+                model="gpt-4o-mini",
+                max_tokens=60,
+                temperature=0,
+                messages=[{
+                    "role": "user",
+                    "content": f"JSON com: valor, categoria, descricao. Categorias: transporte, combustivel, mercado, comida, saude. Entrada: {texto}"
+                }]
+            )
 
-Retorne JSON válido.
+            conteudo = resposta.choices[0].message.content.strip()
+            conteudo = conteudo.replace("```json", "").replace("```", "").strip()
+            dados = json.loads(conteudo)
 
-Gasto: {texto}
-"""
-            }]
-        )
-
-        conteudo = resposta.choices[0].message.content.strip()
-        conteudo = conteudo.replace("```json", "").replace("```", "").strip()
-
-        dados = json.loads(conteudo)
-
-        if isinstance(dados, dict):
-            dados = [dados]
+            if isinstance(dados, dict):
+                dados = [dados]
 
         msg = f"🦆 {user}:\n"
 

@@ -51,13 +51,82 @@ def parse_local(texto):
     texto_lower = texto.lower()
 
     categorias = {
-        "uber": "transporte",
-        "99": "transporte",
-        "gasolina": "combustivel",
-        "mercado": "mercado",
-        "ifood": "comida",
-        "lanche": "comida",
-        "farmacia": "saude"
+    # 🚗 TRANSPORTE
+    "uber": "transporte",
+    "99": "transporte",
+    "taxi": "transporte",
+    "ônibus": "transporte",
+    "onibus": "transporte",
+    "bus": "transporte",
+    "metro": "transporte",
+    "trem": "transporte",
+    "passagem": "transporte",
+
+    # ⛽ COMBUSTÍVEL
+    "gasolina": "combustivel",
+    "etanol": "combustivel",
+    "diesel": "combustivel",
+    "posto": "combustivel",
+    "combustivel": "combustivel",
+
+    # 🛒 MERCADO
+    "mercado": "mercado",
+    "supermercado": "mercado",
+    "compras": "mercado",
+    "feira": "mercado",
+    "hortifruti": "mercado",
+
+    # 🍔 COMIDA
+    "ifood": "comida",
+    "lanche": "comida",
+    "restaurante": "comida",
+    "jantar": "comida",
+    "almoço": "comida",
+    "almoco": "comida",
+    "pizza": "comida",
+    "hamburguer": "comida",
+    "hambúrguer": "comida",
+    "comida": "comida",
+    "rodizio de pizza": "comida",
+    "rodizio japones": "comida",
+    
+
+    # 💊 SAÚDE
+    "farmacia": "saude",
+    "remedio": "saude",
+    "remédio": "saude",
+    "medico": "saude",
+    "consulta": "saude",
+    "exame": "saude",
+    "skincare": "saude",
+    "esmalte": "saude",
+    "algodão": "saude",
+    "algodao": "saude",
+    "lixa de unha": "saude",
+    
+
+    # 👕 ROUPAS
+    "tenis": "roupas",
+    "tênis": "roupas",
+    "blusa": "roupas",
+    "camisa": "roupas",
+    "camiseta": "roupas",
+    "short": "roupas",
+    "bermuda": "roupas",
+    "calça": "roupas",
+    "calca": "roupas",
+    "meia": "roupas",
+    "cueca": "roupas",
+    "calcinha": "roupas",
+    "vestido": "roupas",
+    "jaqueta": "roupas",
+    "casaco": "roupas",
+    "roupa": "roupas",
+    "roupas": "roupas",
+    "regata": "roupa",
+    "regatas": "roupa",
+    
+    
     }
 
     for palavra, cat in categorias.items():

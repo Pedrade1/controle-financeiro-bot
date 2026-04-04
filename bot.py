@@ -51,83 +51,98 @@ def parse_local(texto):
     texto_lower = texto.lower()
 
     categorias = {
-    # 🚗 TRANSPORTE
-    "uber": "transporte",
-    "99": "transporte",
-    "taxi": "transporte",
-    "ônibus": "transporte",
-    "onibus": "transporte",
-    "bus": "transporte",
-    "metro": "transporte",
-    "trem": "transporte",
-    "passagem": "transporte",
+    # 🎉 LAZER (PRIORIDADE ALTA)
+    "cinema": "lazer",
+    "bar": "lazer",
+    "balada": "lazer",
+    "festa": "lazer",
+    "date": "lazer",
+    "passeio": "lazer",
+    "viagem": "lazer",
+    "show": "lazer",
+    "restaurante": "lazer",
 
-    # ⛽ COMBUSTÍVEL
-    "gasolina": "combustivel",
-    "etanol": "combustivel",
-    "diesel": "combustivel",
-    "posto": "combustivel",
-    "combustivel": "combustivel",
-
-    # 🛒 MERCADO
-    "mercado": "mercado",
-    "supermercado": "mercado",
-    "compras": "mercado",
-    "feira": "mercado",
-    "hortifruti": "mercado",
-
-    # 🍔 COMIDA
-    "ifood": "comida",
-    "lanche": "comida",
-    "restaurante": "comida",
-    "jantar": "comida",
-    "almoço": "comida",
-    "almoco": "comida",
-    "pizza": "comida",
-    "hamburguer": "comida",
-    "hambúrguer": "comida",
-    "comida": "comida",
-    "rodizio de pizza": "comida",
-    "rodizio japones": "comida",
-    
-
-    # 💊 SAÚDE
+    # 💊 SAÚDE (INCLUI HIGIENE)
     "farmacia": "saude",
     "remedio": "saude",
     "remédio": "saude",
     "medico": "saude",
     "consulta": "saude",
     "exame": "saude",
-    "skincare": "saude",
-    "esmalte": "saude",
-    "algodão": "saude",
-    "algodao": "saude",
-    "lixa de unha": "saude",
+    "shampoo": "saude",
+    "condicionador": "saude",
+    "sabonete": "saude",
+    "pasta": "saude",
+    "escova": "saude",
+    "desodorante": "saude",
+    "higiene": "saude",
+    "cosmetico": "saude",
+    "cosmético": "saude",
+
+    # 🧍 AQUISIÇÃO PESSOAL (SEM HIGIENE)
+    "tenis": "aquisicao_pessoal",
+    "tênis": "aquisicao_pessoal",
+    "blusa": "aquisicao_pessoal",
+    "camisa": "aquisicao_pessoal",
+    "camiseta": "aquisicao_pessoal",
+    "short": "aquisicao_pessoal",
+    "bermuda": "aquisicao_pessoal",
+    "calça": "aquisicao_pessoal",
+    "calca": "aquisicao_pessoal",
+    "meia": "aquisicao_pessoal",
+    "cueca": "aquisicao_pessoal",
+    "calcinha": "aquisicao_pessoal",
+    "vestido": "aquisicao_pessoal",
+    "jaqueta": "aquisicao_pessoal",
+    "casaco": "aquisicao_pessoal",
+    "perfume": "aquisicao_pessoal",
+    "maquiagem": "aquisicao_pessoal",
     
 
-    # 👕 ROUPAS
-    "tenis": "roupas",
-    "tênis": "roupas",
-    "blusa": "roupas",
-    "camisa": "roupas",
-    "camiseta": "roupas",
-    "short": "roupas",
-    "bermuda": "roupas",
-    "calça": "roupas",
-    "calca": "roupas",
-    "meia": "roupas",
-    "cueca": "roupas",
-    "calcinha": "roupas",
-    "vestido": "roupas",
-    "jaqueta": "roupas",
-    "casaco": "roupas",
-    "roupa": "roupas",
-    "roupas": "roupas",
-    "regata": "roupa",
-    "regatas": "roupa",
+    # 🚗 TRANSPORTE
+    "uber": "transporte",
+    "99": "transporte",
+    "taxi": "transporte",
+    "ônibus": "transporte",
+    "onibus": "transporte",
+
+    # ⛽ COMBUSTÍVEL
+    "gasolina": "combustivel",
+    "etanol": "combustivel",
+    "GNV": "combustivel",
+    "diesel": "combustivel",
+    
+
+    # 🛒 MERCADO
+    "mercado": "mercado",
+    "supermercado": "mercado",
+    "feira": "mercado",
+    "vassoura": "mercado",
+    "amaciante": "mercado",
+    "sabao em pó": "mercado",
+    "molho de tomate": "mercado",
+    "maionese": "mercado",
+    "alface": "mercado",
+    "fruta": "mercado",
+    "carne": "mercado",
+    "frango": "mercado",
     
     
-    }
+    
+    
+    # 🍔 COMIDA (PRIORIDADE MENOR QUE LAZER)
+    "ifood": "comida",
+    "lanche": "comida",
+    "hamburguer": "comida",
+    "hambúrguer": "comida",
+    "pizza": "comida",
+    "jantar": "comida",
+    "almoço": "comida",
+    "almoco": "comida",
+    "salada de frutas": "comida",
+    
+    
+}
 
     for palavra, cat in categorias.items():
         if palavra in texto_lower:
